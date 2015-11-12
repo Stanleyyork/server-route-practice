@@ -11,6 +11,13 @@ $(function() {
 		updateBook(id, title, ranking);
 	});
 
+	// Delete Single Book
+	$('#delete').on('click', function(data){
+		var id = $('#delete').attr('data-id');
+		deleteBook(id);
+	});
+
+	// updateBook function - calls API
 	function updateBook(id, title, ranking){
 		$.ajax({
 	      type: "PUT",
@@ -23,6 +30,20 @@ $(function() {
 	        console.error(error);
 	      }
 	    });
+	}
+
+	// deleteBook function - calls API
+	function deleteBook(id){
+		$.ajax({
+			type: "DELETE",
+			url: 'http://localhost:3000/api/books/' + id,
+			success: function (data) {
+	        	console.log("Updated!");
+		    },
+		    error: function (error) {
+		    	console.error(error);
+		    }
+		});
 	}
 
 });
